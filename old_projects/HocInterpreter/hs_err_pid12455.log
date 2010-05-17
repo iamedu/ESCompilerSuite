@@ -1,0 +1,360 @@
+#
+# An unexpected error has been detected by Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0xb46bd2d0, pid=12455, tid=3084229520
+#
+# Java VM: Java HotSpot(TM) Client VM (11.2-b01 mixed mode, sharing linux-x86)
+# Problematic frame:
+# C  [libQtGui.so.4+0x1242d0]  _ZN19QApplicationPrivate16isBlockedByModalEP7QWidget+0x50
+#
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x089bec00):  JavaThread "main" [_thread_in_native, id=12456, stack(0xb7d09000,0xb7d5a000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x00000000
+
+Registers:
+EAX=0x00000000, EBX=0xb4f191cc, ECX=0xb4f191cc, EDX=0x00000000
+ESP=0xb7d58ae0, EBP=0xb7d58af8, ESI=0x00000000, EDI=0xb2432b4c
+EIP=0xb46bd2d0, CR2=0x00000000, EFLAGS=0x00010282
+
+Top of Stack: (sp=0xb7d58ae0)
+0xb7d58ae0:   08be45b0 00000000 b2432b4c b4f191cc
+0xb7d58af0:   00000000 b2432b4c b7d58b18 b46bd4e4
+0xb7d58b00:   b2432b4c 00000000 b7d58b18 b46bd4b4
+0xb7d58b10:   b4f191cc b7d58d0c b7d58b58 b4716c22
+0xb7d58b20:   b2432b4c 00000000 b7d58b68 b4716bde
+0xb7d58b30:   08bd7c40 b7d58d0c b7d58b58 b46fbb7d
+0xb7d58b40:   08c16d20 08be74d0 00003fc0 b4f191cc
+0xb7d58b50:   b7d58d0c b7d58d0c b7d58ce8 b472534d 
+
+Instructions: (pc=0xb46bd2d0)
+0xb46bd2c0:   e8 2b cc fe ff 39 45 f0 74 e3 8b 83 44 d4 01 00
+0xb46bd2d0:   8b 10 8b 42 0c 2b 42 08 85 c0 7e d1 c7 45 ec 00 
+
+Stack: [0xb7d09000,0xb7d5a000],  sp=0xb7d58ae0,  free space=318k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libQtGui.so.4+0x1242d0]  _ZN19QApplicationPrivate16isBlockedByModalEP7QWidget+0x50
+C  [libQtGui.so.4+0x1244e4]  _ZN19QApplicationPrivate14tryModalHelperEP7QWidgetPS1_+0x54
+C  [libQtGui.so.4+0x17dc22]  _Z12qt_try_modalP7QWidgetP7_XEvent+0x52
+C  [libQtGui.so.4+0x18c34d]  _ZN12QApplication15x11ProcessEventEP7_XEvent+0x16d
+C  [libQtGui.so.4+0x1b5cd2]
+C  [libglib-2.0.so.0+0x391d8]  g_main_context_dispatch+0x1e8
+C  [libglib-2.0.so.0+0x3c873]
+C  [libglib-2.0.so.0+0x3ca31]  g_main_context_iteration+0x71
+C  [libQtCore.so.4+0x17c53e]  _ZN20QEventDispatcherGlib13processEventsE6QFlagsIN10QEventLoop17ProcessEventsFlagEE+0xbe
+C  [libQtGui.so.4+0x1b581b]
+C  [libQtCore.so.4+0x14eea7]  _ZN10QEventLoop13processEventsE6QFlagsINS_17ProcessEventsFlagEE+0x47
+C  [libQtCore.so.4+0x14f08b]  _ZN10QEventLoop4execE6QFlagsINS_17ProcessEventsFlagEE+0x9b
+C  [libQtCore.so.4+0x150ee1]  _ZN16QCoreApplication4execEv+0xa1
+C  [libQtGui.so.4+0x1205e9]  _ZN12QApplication4execEv+0x29
+C  [libcom_trolltech_qt_gui.so+0x433136]  Java_com_trolltech_qt_gui_QApplication_exec__+0x16
+j  com.trolltech.qt.gui.QApplication.exec()I+0
+j  escom.hoc.interpreter.HocInterpreter.main([Ljava/lang/String;)V+17
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x21b25d]
+V  [libjvm.so+0x30f998]
+V  [libjvm.so+0x21b0f0]
+V  [libjvm.so+0x2448a6]
+V  [libjvm.so+0x2360a8]
+C  [java+0x1b98]  JavaMain+0x2c8
+C  [libpthread.so.0+0x64c0]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  com.trolltech.qt.gui.QApplication.exec()I+0
+j  escom.hoc.interpreter.HocInterpreter.main([Ljava/lang/String;)V+17
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0xb360b400 JavaThread "Thread-2" daemon [_thread_in_native, id=12482, stack(0xb2434000,0xb2c35000)]
+  0x08ad9800 JavaThread "Thread-0" daemon [_thread_blocked, id=12467, stack(0xb50ab000,0xb50fc000)]
+  0x089f6000 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=12462, stack(0xb57f6000,0xb5847000)]
+  0x089f3000 JavaThread "CompilerThread0" daemon [_thread_blocked, id=12461, stack(0xb5847000,0xb58c8000)]
+  0x089f1400 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=12460, stack(0xb58c8000,0xb5919000)]
+  0x089e8c00 JavaThread "Finalizer" daemon [_thread_blocked, id=12459, stack(0xb5a53000,0xb5aa4000)]
+  0x089e7400 JavaThread "Reference Handler" daemon [_thread_blocked, id=12458, stack(0xb5aa4000,0xb5af5000)]
+=>0x089bec00 JavaThread "main" [_thread_in_native, id=12456, stack(0xb7d09000,0xb7d5a000)]
+
+Other Threads:
+  0x089e5800 VMThread [stack: 0xb5af5000,0xb5b76000] [id=12457]
+  0x08a09c00 WatcherThread [stack: 0xb5775000,0xb57f6000] [id=12463]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 960K, used 521K [0x8c0b0000, 0x8c1b0000, 0x8c590000)
+  eden space 896K,  52% used [0x8c0b0000, 0x8c1257c0, 0x8c190000)
+  from space 64K,  80% used [0x8c1a0000, 0x8c1ace98, 0x8c1b0000)
+  to   space 64K,   0% used [0x8c190000, 0x8c190000, 0x8c1a0000)
+ tenured generation   total 4096K, used 992K [0x8c590000, 0x8c990000, 0x900b0000)
+   the space 4096K,  24% used [0x8c590000, 0x8c688258, 0x8c688400, 0x8c990000)
+ compacting perm gen  total 12288K, used 5149K [0x900b0000, 0x90cb0000, 0x940b0000)
+   the space 12288K,  41% used [0x900b0000, 0x905b7590, 0x905b7600, 0x90cb0000)
+    ro space 8192K,  74% used [0x940b0000, 0x946a80d8, 0x946a8200, 0x948b0000)
+    rw space 12288K,  58% used [0x948b0000, 0x94fc3618, 0x94fc3800, 0x954b0000)
+
+Dynamic libraries:
+06000000-0642a000 r-xp 00000000 08:02 622322     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/client/libjvm.so
+0642a000-06444000 rwxp 0042a000 08:02 622322     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/client/libjvm.so
+06444000-06864000 rwxp 06444000 00:00 0 
+08048000-08052000 r-xp 00000000 08:02 760882     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/bin/java
+08052000-08053000 rwxp 00009000 08:02 760882     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/bin/java
+089b9000-08f88000 rwxp 089b9000 00:00 0          [heap]
+8c0b0000-8c1b0000 rwxp 8c0b0000 00:00 0 
+8c1b0000-8c590000 rwxp 8c1b0000 00:00 0 
+8c590000-8c990000 rwxp 8c590000 00:00 0 
+8c990000-900b0000 rwxp 8c990000 00:00 0 
+900b0000-90cb0000 rwxp 900b0000 00:00 0 
+90cb0000-940b0000 rwxp 90cb0000 00:00 0 
+940b0000-946a9000 r-xs 00001000 08:02 621710     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/client/classes.jsa
+946a9000-948b0000 rwxp 946a9000 00:00 0 
+948b0000-94fc4000 rwxp 005fa000 08:02 621710     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/client/classes.jsa
+94fc4000-954b0000 rwxp 94fc4000 00:00 0 
+954b0000-9558c000 rwxp 00d0e000 08:02 621710     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/client/classes.jsa
+9558c000-958b0000 rwxp 9558c000 00:00 0 
+958b0000-958b4000 r-xs 00dea000 08:02 621710     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/client/classes.jsa
+958b4000-95cb0000 rwxp 958b4000 00:00 0 
+b234e000-b23e3000 r-xp 00000000 08:02 213389     /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf
+b23e3000-b23e6000 rwxp b23e3000 00:00 0 
+b23e6000-b2434000 rwxp b23e6000 00:00 0 
+b2434000-b2437000 ---p b2434000 00:00 0 
+b2437000-b2c35000 rwxp b2437000 00:00 0 
+b2c35000-b2c36000 ---p b2c35000 00:00 0 
+b2c36000-b3436000 rwxp b2c36000 00:00 0 
+b3436000-b3483000 r-xp 00000000 08:02 657266     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqtiff.so
+b3483000-b3486000 rwxp 0004d000 08:02 657266     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqtiff.so
+b3486000-b34ca000 r-xp 00000000 08:02 588978     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libQtXml.so.4
+b34ca000-b34cc000 rwxp 00043000 08:02 588978     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libQtXml.so.4
+b34cc000-b3521000 r-xp 00000000 08:02 588980     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libQtSvg.so.4
+b3521000-b3523000 rwxp 00054000 08:02 588980     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libQtSvg.so.4
+b3523000-b356e000 r-xp 00000000 08:02 657265     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqmng.so
+b356e000-b3570000 rwxp 0004b000 08:02 657265     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqmng.so
+b3570000-b3576000 r-xp 00000000 08:02 657264     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqgif.so
+b3576000-b3577000 rwxp 00005000 08:02 657264     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqgif.so
+b3577000-b3600000 r-xp 00000000 08:02 213387     /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans-Bold.ttf
+b3600000-b362f000 rwxp b3600000 00:00 0 
+b362f000-b3700000 ---p b362f000 00:00 0 
+b3744000-b376a000 r-xp 00000000 08:02 657263     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqjpeg.so
+b376a000-b376b000 rwxp 00025000 08:02 657263     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqjpeg.so
+b376b000-b37b4000 r-xp 00000000 08:02 2346582    /usr/lib/libORBit-2.so.0.1.0
+b37b4000-b37bd000 rwxp 00049000 08:02 2346582    /usr/lib/libORBit-2.so.0.1.0
+b37bd000-b37be000 rwxp b37bd000 00:00 0 
+b37be000-b37ed000 r-xp 00000000 08:02 2346595    /usr/lib/libgconf-2.so.4.1.5
+b37ed000-b37f0000 rwxp 0002e000 08:02 2346595    /usr/lib/libgconf-2.so.4.1.5
+b37f0000-b382b000 r-xp 00000000 08:02 121838     /usr/lib/libgobject-2.0.so.0.1600.6
+b382b000-b382c000 rwxp 0003b000 08:02 121838     /usr/lib/libgobject-2.0.so.0.1600.6
+b3846000-b38db000 r-xp 00000000 08:02 213389     /usr/share/fonts/truetype/ttf-dejavu/DejaVuSans.ttf
+b38db000-b38e2000 r-xp 00000000 08:02 114604     /usr/lib/libXi.so.6.0.0
+b38e2000-b38e3000 rwxp 00007000 08:02 114604     /usr/lib/libXi.so.6.0.0
+b38e3000-b38e5000 r-xp 00000000 08:02 122018     /usr/lib/libXinerama.so.1.0.0
+b38e5000-b38e6000 rwxp 00001000 08:02 122018     /usr/lib/libXinerama.so.1.0.0
+b38e6000-b38ee000 r-xp 00000000 08:02 121833     /usr/lib/libXcursor.so.1.0.2
+b38ee000-b38ef000 rwxp 00007000 08:02 121833     /usr/lib/libXcursor.so.1.0.2
+b38ef000-b38f3000 r-xp 00000000 08:02 121811     /usr/lib/libXfixes.so.3.1.0
+b38f3000-b38f4000 rwxp 00003000 08:02 121811     /usr/lib/libXfixes.so.3.1.0
+b38f4000-b38f9000 r-xp 00000000 08:02 122084     /usr/lib/libXrandr.so.2.1.0
+b38f9000-b38fa000 rwxp 00005000 08:02 122084     /usr/lib/libXrandr.so.2.1.0
+b390c000-b390f000 r-xp 00000000 08:02 657267     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqsvg.so
+b390f000-b3910000 rwxp 00003000 08:02 657267     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/plugins/imageformats/libqsvg.so
+b3910000-b3913000 r-xp 00000000 08:02 121840     /usr/lib/libgmodule-2.0.so.0.1600.6
+b3913000-b3914000 rwxp 00002000 08:02 121840     /usr/lib/libgmodule-2.0.so.0.1600.6
+b3914000-b3917000 r-xs 00000000 08:02 1366804    /var/cache/fontconfig/5e10083637a12ecd1bff191eb66bfa2f-x86.cache-2
+b3917000-b3920000 r-xs 00000000 08:02 1366805    /var/cache/fontconfig/945677eb7aeaf62f1d50efc3fb3ec7d8-x86.cache-2
+b3920000-b3924000 r-xs 00000000 08:02 1367040    /var/cache/fontconfig/926e794c3d5e5dffcaf2fa83ef8d36c2-x86.cache-2
+b3924000-b3927000 r-xs 00000000 08:02 1367248    /var/cache/fontconfig/6eb3985aa4124903f6ff08ba781cd364-x86.cache-2
+b3927000-b392e000 r-xs 00000000 08:02 1366830    /var/cache/fontconfig/6d41288fd70b0be22e8c3a91e032eec0-x86.cache-2
+b392e000-b3950000 r-xs 00000000 08:02 1366996    /var/cache/fontconfig/365b55f210c0a22e9a19e35191240f32-x86.cache-2
+b3950000-b3952000 r-xs 00000000 08:02 1366799    /var/cache/fontconfig/2c5ba8142dffc8bf0377700342b8ca1a-x86.cache-2
+b3952000-b3961000 r-xs 00000000 08:02 1366809    /var/cache/fontconfig/e13b20fdb08344e0e664864cc2ede53d-x86.cache-2
+b3961000-b3964000 r-xs 00000000 08:02 1366808    /var/cache/fontconfig/ba022efc551c75e21c690774bbcf5304-x86.cache-2
+b3964000-b433a000 r-xp 00000000 08:02 591053     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libcom_trolltech_qt_gui.so
+b433a000-b4365000 rwxp 009d5000 08:02 591053     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libcom_trolltech_qt_gui.so
+b4365000-b4368000 rwxp b4365000 00:00 0 
+b4368000-b436c000 r-xp 00000000 08:02 121803     /usr/lib/libXdmcp.so.6.0.0
+b436c000-b436d000 rwxp 00003000 08:02 121803     /usr/lib/libXdmcp.so.6.0.0
+b436d000-b4384000 r-xp 00000000 08:02 121805     /usr/lib/libxcb.so.1.0.0
+b4384000-b4385000 rwxp 00016000 08:02 121805     /usr/lib/libxcb.so.1.0.0
+b4385000-b4386000 r-xp 00000000 08:02 121807     /usr/lib/libxcb-xlib.so.0.0.0
+b4386000-b4387000 rwxp 00000000 08:02 121807     /usr/lib/libxcb-xlib.so.0.0.0
+b4387000-b4389000 r-xp 00000000 08:02 121801     /usr/lib/libXau.so.6.0.0
+b4389000-b438a000 rwxp 00001000 08:02 121801     /usr/lib/libXau.so.6.0.0
+b438a000-b43ae000 r-xp 00000000 08:02 120564     /usr/lib/libexpat.so.1.5.2
+b43ae000-b43b0000 rwxp 00023000 08:02 120564     /usr/lib/libexpat.so.1.5.2
+b43b0000-b449b000 r-xp 00000000 08:02 121809     /usr/lib/libX11.so.6.2.0
+b449b000-b449f000 rwxp 000ea000 08:02 121809     /usr/lib/libX11.so.6.2.0
+b449f000-b44ac000 r-xp 00000000 08:02 121822     /usr/lib/libXext.so.6.4.0
+b44ac000-b44ad000 rwxp 0000c000 08:02 121822     /usr/lib/libXext.so.6.4.0
+b44ad000-b44d7000 r-xp 00000000 08:02 2347503    /usr/lib/libfontconfig.so.1.3.0
+b44d7000-b44d8000 rwxp 0002a000 08:02 2347503    /usr/lib/libfontconfig.so.1.3.0
+b44d8000-b44e0000 r-xp 00000000 08:02 121831     /usr/lib/libXrender.so.1.3.0
+b44e0000-b44e1000 rwxp 00007000 08:02 121831     /usr/lib/libXrender.so.1.3.0
+b44e1000-b44f5000 r-xp 00000000 08:02 121813     /usr/lib/libICE.so.6.3.0
+b44f5000-b44f6000 rwxp 00014000 08:02 121813     /usr/lib/libICE.so.6.3.0
+b44f6000-b44f8000 rwxp b44f6000 00:00 0 
+b44f8000-b44ff000 r-xp 00000000 08:02 121815     /usr/lib/libSM.so.6.0.0
+b44ff000-b4500000 rwxp 00006000 08:02 121815     /usr/lib/libSM.so.6.0.0
+b4500000-b4571000 r-xp 00000000 08:02 118805     /usr/lib/libfreetype.so.6.3.18
+b4571000-b4575000 rwxp 00070000 08:02 118805     /usr/lib/libfreetype.so.6.3.18
+b4575000-b4598000 r-xp 00000000 08:02 117066     /usr/lib/libpng12.so.0.27.0
+b4598000-b4599000 rwxp 00023000 08:02 117066     /usr/lib/libpng12.so.0.27.0
+b4599000-b4f11000 r-xp 00000000 08:02 588977     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libQtGui.so.4
+b4f11000-b4f37000 rwxp 00977000 08:02 588977     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libQtGui.so.4
+b4f37000-b4f39000 rwxp b4f37000 00:00 0 
+b4f39000-b50a3000 r-xp 00000000 08:02 591052     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libcom_trolltech_qt_core.so
+b50a3000-b50ab000 rwxp 0016a000 08:02 591052     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libcom_trolltech_qt_core.so
+b50ab000-b50ae000 ---p b50ab000 00:00 0 
+b50ae000-b50fc000 rwxp b50ae000 00:00 0 
+b50fc000-b513c000 r-xp 00000000 08:02 591051     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libqtjambi.so
+b513c000-b513d000 rwxp 00040000 08:02 591051     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libqtjambi.so
+b513d000-b5165000 r-xp 00000000 08:02 122142     /usr/lib/libpcre.so.3.12.1
+b5165000-b5166000 rwxp 00027000 08:02 122142     /usr/lib/libpcre.so.3.12.1
+b5166000-b5172000 r-xp 00000000 08:02 973073     /lib/libgcc_s.so.1
+b5172000-b5173000 rwxp 0000b000 08:02 973073     /lib/libgcc_s.so.1
+b5173000-b524f000 r-xp 00000000 08:02 588974     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libstdc++.so.6
+b524f000-b5254000 rwxp 000dc000 08:02 588974     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libstdc++.so.6
+b5254000-b5259000 rwxp b5254000 00:00 0 
+b5259000-b530d000 r-xp 00000000 08:02 121841     /usr/lib/libglib-2.0.so.0.1600.6
+b530d000-b530e000 rwxp 000b4000 08:02 121841     /usr/lib/libglib-2.0.so.0.1600.6
+b530e000-b5312000 r-xp 00000000 08:02 121837     /usr/lib/libgthread-2.0.so.0.1600.6
+b5312000-b5313000 rwxp 00003000 08:02 121837     /usr/lib/libgthread-2.0.so.0.1600.6
+b5313000-b5327000 r-xp 00000000 08:02 116994     /usr/lib/libz.so.1.2.3.3
+b5327000-b5328000 rwxp 00013000 08:02 116994     /usr/lib/libz.so.1.2.3.3
+b5329000-b5337000 r-xs 00000000 08:02 1366854    /var/cache/fontconfig/865f88548240fee46819705c6468c165-x86.cache-2
+b5337000-b5339000 r-xp 00000000 08:02 2355026    /usr/lib/gconv/UTF-16.so
+b5339000-b533b000 rwxp 00001000 08:02 2355026    /usr/lib/gconv/UTF-16.so
+b533b000-b5342000 r-xs 00000000 08:02 122311     /usr/lib/gconv/gconv-modules.cache
+b5342000-b5580000 r-xp 00000000 08:02 588976     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libQtCore.so.4
+b5580000-b5588000 rwxp 0023d000 08:02 588976     /tmp/QtJambi_iamedu_i386_4.5.0_01_gcc-20090310-1022/lib/libQtCore.so.4
+b5588000-b55bc000 rwxp b5588000 00:00 0 
+b55bc000-b574e000 r-xs 02f2c000 08:02 613324     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/rt.jar
+b574e000-b5750000 r-xs 014b1000 08:04 975545     /home/iamedu/Escom/compiladores/hoc/hoc5/HocInterpreter/lib/QtJambi/qtjambi-linux32-gcc-4.5.0_01.jar
+b5750000-b5775000 r-xs 0027d000 08:04 975543     /home/iamedu/Escom/compiladores/hoc/hoc5/HocInterpreter/lib/QtJambi/qtjambi-4.5.0_01.jar
+b5775000-b5776000 ---p b5775000 00:00 0 
+b5776000-b57f6000 rwxp b5776000 00:00 0 
+b57f6000-b57f9000 ---p b57f6000 00:00 0 
+b57f9000-b5847000 rwxp b57f9000 00:00 0 
+b5847000-b584a000 ---p b5847000 00:00 0 
+b584a000-b58c8000 rwxp b584a000 00:00 0 
+b58c8000-b58cb000 ---p b58c8000 00:00 0 
+b58cb000-b5919000 rwxp b58cb000 00:00 0 
+b5919000-b5a53000 r-xp 00000000 08:02 130869     /usr/lib/locale/locale-archive
+b5a53000-b5a56000 ---p b5a53000 00:00 0 
+b5a56000-b5aa4000 rwxp b5a56000 00:00 0 
+b5aa4000-b5aa7000 ---p b5aa4000 00:00 0 
+b5aa7000-b5af5000 rwxp b5aa7000 00:00 0 
+b5af5000-b5af6000 ---p b5af5000 00:00 0 
+b5af6000-b5b7d000 rwxp b5af6000 00:00 0 
+b5b7d000-b5b97000 rwxp b5b7d000 00:00 0 
+b5b97000-b5b9a000 rwxp b5b97000 00:00 0 
+b5b9a000-b5bb5000 rwxp b5b9a000 00:00 0 
+b5bb5000-b5bb6000 rwxp b5bb5000 00:00 0 
+b5bb6000-b5bb7000 rwxp b5bb6000 00:00 0 
+b5bb7000-b5bba000 rwxp b5bb7000 00:00 0 
+b5bba000-b5bd5000 rwxp b5bba000 00:00 0 
+b5bd5000-b5bdb000 rwxp b5bd5000 00:00 0 
+b5bdb000-b5bf5000 rwxp b5bdb000 00:00 0 
+b5bf5000-b5c04000 rwxp b5bf5000 00:00 0 
+b5c04000-b5c80000 rwxp b5c04000 00:00 0 
+b5c80000-b5d48000 rwxp b5c80000 00:00 0 
+b5d48000-b7c80000 rwxp b5d48000 00:00 0 
+b7c80000-b7c8f000 r-xp 00000000 08:02 613296     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/libzip.so
+b7c8f000-b7c91000 rwxp 0000e000 08:02 613296     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/libzip.so
+b7c91000-b7cb4000 r-xp 00000000 08:02 613302     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/libjava.so
+b7cb4000-b7cb6000 rwxp 00023000 08:02 613302     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/libjava.so
+b7cb6000-b7cc0000 r-xp 00000000 08:02 981136     /lib/i686/cmov/libnss_files-2.7.so
+b7cc0000-b7cc2000 rwxp 00009000 08:02 981136     /lib/i686/cmov/libnss_files-2.7.so
+b7cc2000-b7ccb000 r-xp 00000000 08:02 981138     /lib/i686/cmov/libnss_nis-2.7.so
+b7ccb000-b7ccd000 rwxp 00008000 08:02 981138     /lib/i686/cmov/libnss_nis-2.7.so
+b7ccd000-b7ce2000 r-xp 00000000 08:02 981133     /lib/i686/cmov/libnsl-2.7.so
+b7ce2000-b7ce4000 rwxp 00014000 08:02 981133     /lib/i686/cmov/libnsl-2.7.so
+b7ce4000-b7ce6000 rwxp b7ce4000 00:00 0 
+b7ce6000-b7ce8000 r-xs 00011000 08:04 967622     /home/iamedu/Escom/compiladores/hoc/hoc5/HocInterpreter/lib/cup.jar
+b7ce8000-b7cf4000 rwxp b7ce8000 00:00 0 
+b7cf4000-b7cff000 r-xp 00000000 08:02 613289     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/libverify.so
+b7cff000-b7d00000 rwxp 0000b000 08:02 613289     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/libverify.so
+b7d00000-b7d07000 r-xp 00000000 08:02 981145     /lib/i686/cmov/librt-2.7.so
+b7d07000-b7d09000 rwxp 00006000 08:02 981145     /lib/i686/cmov/librt-2.7.so
+b7d09000-b7d0c000 ---p b7d09000 00:00 0 
+b7d0c000-b7d5a000 rwxp b7d0c000 00:00 0 
+b7d5a000-b7d7e000 r-xp 00000000 08:02 981131     /lib/i686/cmov/libm-2.7.so
+b7d7e000-b7d80000 rwxp 00023000 08:02 981131     /lib/i686/cmov/libm-2.7.so
+b7d80000-b7d81000 rwxp b7d80000 00:00 0 
+b7d81000-b7ed6000 r-xp 00000000 08:02 981125     /lib/i686/cmov/libc-2.7.so
+b7ed6000-b7ed7000 r-xp 00155000 08:02 981125     /lib/i686/cmov/libc-2.7.so
+b7ed7000-b7ed9000 rwxp 00156000 08:02 981125     /lib/i686/cmov/libc-2.7.so
+b7ed9000-b7edc000 rwxp b7ed9000 00:00 0 
+b7edc000-b7ede000 r-xp 00000000 08:02 981129     /lib/i686/cmov/libdl-2.7.so
+b7ede000-b7ee0000 rwxp 00001000 08:02 981129     /lib/i686/cmov/libdl-2.7.so
+b7ee0000-b7ee7000 r-xp 00000000 08:02 622309     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/jli/libjli.so
+b7ee7000-b7ee9000 rwxp 00006000 08:02 622309     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/jli/libjli.so
+b7ee9000-b7eea000 rwxp b7ee9000 00:00 0 
+b7eea000-b7eff000 r-xp 00000000 08:02 981143     /lib/i686/cmov/libpthread-2.7.so
+b7eff000-b7f01000 rwxp 00014000 08:02 981143     /lib/i686/cmov/libpthread-2.7.so
+b7f01000-b7f03000 rwxp b7f01000 00:00 0 
+b7f03000-b7f0b000 rwxs 00000000 08:02 588971     /tmp/hsperfdata_iamedu/12455
+b7f0b000-b7f12000 r-xp 00000000 08:02 981134     /lib/i686/cmov/libnss_compat-2.7.so
+b7f12000-b7f14000 rwxp 00006000 08:02 981134     /lib/i686/cmov/libnss_compat-2.7.so
+b7f14000-b7f1a000 r-xp 00000000 08:02 622325     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/native_threads/libhpi.so
+b7f1a000-b7f1b000 rwxp 00006000 08:02 622325     /usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/native_threads/libhpi.so
+b7f1b000-b7f1c000 rwxp b7f1b000 00:00 0 
+b7f1c000-b7f1d000 r-xp b7f1c000 00:00 0 
+b7f1d000-b7f1f000 rwxp b7f1d000 00:00 0 
+b7f1f000-b7f20000 r-xp b7f1f000 00:00 0          [vdso]
+b7f20000-b7f3a000 r-xp 00000000 08:02 973275     /lib/ld-2.7.so
+b7f3a000-b7f3c000 rwxp 0001a000 08:02 973275     /lib/ld-2.7.so
+bff26000-bff3b000 rwxp bffeb000 00:00 0          [stack]
+
+VM Arguments:
+java_command: escom.hoc.interpreter.HocInterpreter
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=/home/iamedu/bin:/opt/OpenPrinting-Gutenprint/sbin:/opt/OpenPrinting-Gutenprint/bin:/usr/local/bin:/usr/bin:/bin:/usr/games
+USERNAME=iamedu
+LD_LIBRARY_PATH=/usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386/client:/usr/lib/jvm/java-6-sun-1.6.0.12/jre/lib/i386:/usr/lib/jvm/java-6-sun-1.6.0.12/jre/../lib/i386
+SHELL=/bin/bash
+DISPLAY=:0.0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x3cd180], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x3cd180], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x30ea50], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: SIG_IGN, sa_mask[0]=0x00001000, sa_flags=0x10000000
+SIGXFSZ: [libjvm.so+0x30ea50], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x30ea50], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x310f20], sa_mask[0]=0x00000004, sa_flags=0x10000004
+SIGHUP: [libjvm.so+0x310cc0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGINT: SIG_IGN, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGTERM: [libjvm.so+0x310cc0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGQUIT: [libjvm.so+0x310cc0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+
+
+---------------  S Y S T E M  ---------------
+
+OS:5.0.1
+
+uname:Linux 2.6.26-2-686 #1 SMP Thu May 28 15:39:35 UTC 2009 i686
+libc:glibc 2.7 NPTL 2.7 
+rlimit: STACK 8192k, CORE 0k, NPROC 8104, NOFILE 1024, AS infinity
+load average:2.31 2.10 1.72
+
+CPU:total 2 (1 cores per cpu, 2 threads per core) family 6 model 12 stepping 2, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, ht
+
+Memory: 4k page, physical 1024216k(15064k free), swap 2634652k(2634396k free)
+
+vm_info: Java HotSpot(TM) Client VM (11.2-b01) for linux-x86 JRE (1.6.0_12-b04), built on Jan 17 2009 02:00:28 by "java_re" with gcc 3.2.1-7a (J2SE release)
+
+time: Wed Jun 17 22:18:51 2009
+elapsed time: 12 seconds
+

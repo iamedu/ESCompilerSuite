@@ -1,0 +1,7 @@
+E->T E';
+E'->or T E'|EPSILON;
+T->C T';
+T'->C T'|EPSILON;
+C->F C';
+C'->+C'|*C'|?C'|EPSILON;
+F->(E)|simbolo;

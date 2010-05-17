@@ -1,0 +1,64 @@
+import java_cup.runtime.*;
+
+action code {:
+	public static void code3(String c1, String c2, String c3) {
+		code(c1);
+		code(c2);
+		code(c3);
+	}
+
+	public static void code(String cosa) {
+		System.out.println(cosa);
+	}
+
+	public static void code2(String c1, String c2) {
+		code(c1);
+		code(c2);
+	}
+:}
+
+parser code {:
+
+
+	public static void main(String args[]) throws Exception {
+		Symbol s = (new parser(new Yylex(System.in)).parse());
+	}
+:}
+
+terminal ADD, SUB, MUL, DIV, LPAR, RPAR, POW, ASGN, NL;
+terminal UMINUS;
+terminal String NUM, VAR;
+
+non terminal list, asgn, expr;
+
+precedence right ASGN;
+precedence left ADD, SUB;
+precedence left MUL, DIV;
+precedence left UMINUS;
+precedence left POW;
+
+start with list;
+
+list ::=
+	| list NL
+	| list asgn NL {: code("pop"); :}
+	| list expr NL {: code("print"); :}
+	| list error NL
+	;
+
+asgn ::=
+	VAR:v ASGN expr {: code3("varpush", v, "asgn"); :}
+	;
+expr ::=
+	  NUM:n {: code2("constpush", n); :}
+	| VAR:v {: code2("varpush", v); :}
+	| asgn
+	| LPAR expr:e
+	| expr ADD expr {: code("add"); :}
+	| expr SUB expr {: code("sub"); :}
+	| expr MUL expr {: code("mul"); :}
+	| expr DIV expr {: code("div"); :}
+	| expr POW expr {: code("pow"); :}
+	| SUB expr {: code("negate"); :} %prec UMINUS
+	;
+

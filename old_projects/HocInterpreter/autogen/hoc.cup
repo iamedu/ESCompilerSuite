@@ -1,0 +1,373 @@
+import java_cup.runtime.*;
+import java.util.List;
+import java.util.ArrayList;
+
+action code {:
+
+	public static List addAll(List original, List other) {
+		List<String> d = (List<String>)other;
+		String s;
+		String r;
+		for(int i = 0; i < d.size(); i++) {
+			s = d.get(i);
+			if("whilecode".equals(s)) {
+				for(int j = 1; j < 3; j++) {
+					r = String.valueOf(
+						Integer.parseInt(
+							d.get(i + j)
+				       	 	) + original.size()
+				    	);
+					d.set(i + j, r);
+				}
+				continue;
+			}
+			if("ifcode".equals(s)) {
+				for(int j = 1; j < 4; j++) {
+					if("stop".equals(d.get(i + j))) {
+						continue;
+					}
+					r = String.valueOf(
+						Integer.parseInt(
+							d.get(i + j)
+				       	 	) + original.size()
+				    	);
+					d.set(i + j, r);
+				}
+			}
+			if("forcode".equals(s)) {
+				for(int j = 1; j < 5; j++) {
+					if("stop".equals(d.get(i + j))) {
+						continue;
+					}
+					r = String.valueOf(
+						Integer.parseInt(
+							d.get(i + j)
+				       	 	) + original.size()
+				    	);
+					d.set(i + j, r);
+				}
+			}
+			if("casecode".equals(s) || "switchcode".equals(s)) {
+				for(int j = 1; j < 3; j++) {
+					if("stop".equals(d.get(i + j))) {
+						continue;
+					}
+					r = String.valueOf(
+						Integer.parseInt(
+							d.get(i + j)
+				       	 	) + original.size()
+				    	);
+					d.set(i + j, r);
+				}
+			}
+		}
+		original.addAll(other);
+		return original;
+	}
+
+	public static List newList(String c1) {
+		ArrayList result = new ArrayList();
+		code(result, c1);
+		return result;
+	}
+
+	public static List newList2(String c1, String c2) {
+		ArrayList result = new ArrayList();
+		code2(result, c1, c2);
+		return result;
+	}
+
+	public static List code4(List p, String c1, String c2,
+					 String c3, String c4) {
+		code(p, c1);
+		code(p, c2);
+		code(p, c3);
+		code(p, c4);
+		return p;
+	}
+
+	public static List code5(List p, String c1, String c2,
+					 String c3, String c4,
+					 String c5) {
+		code(p, c1);
+		code(p, c2);
+		code(p, c3);
+		code(p, c4);
+		code(p, c5);
+		return p;
+	}
+
+	public static List newList3(String c1, String c2, String c3) {
+		ArrayList result = new ArrayList();
+		code3(result, c1, c2, c3);
+		return result;
+	}
+
+	public static List newList4(String c1, String c2, String c3, String c4) {
+		ArrayList result = new ArrayList();
+		code4(result, c1, c2, c3, c4);
+		return result;
+	}
+
+	public static List newList5(String c1, String c2, String c3, String c4, String c5) {
+		ArrayList result = new ArrayList();
+		code5(result, c1, c2, c3, c4, c5);
+		return result;
+	}
+
+	public static List code3(List p, String c1, String c2, String c3) {
+		code(p, c1);
+		code(p, c2);
+		code(p, c3);
+		return p;
+	}
+
+	public static List code(List p, String cosa) {
+		if(p == null) {
+			p = new ArrayList();
+		}
+		p.add(cosa);
+		return p;
+	}
+
+	public static List code2(List p, String c1, String c2) {
+		code(p, c1);
+		code(p, c2);
+		return p;
+	}
+:}
+
+parser code {:
+
+	public static void main(String args[]) throws Exception {
+		Symbol s = (new parser(new Yylex(System.in)).parse());
+		int i = 0;
+		for(String st : (List<String>)s.value) {
+			System.out.println(i++ + " " + st);
+		}
+	}
+:}
+
+terminal ADD, SUB, MUL, DIV, LPAR, RPAR, POW, ASGN, NL, LBRA, RBRA, PYC;
+terminal OR, AND, EQ, NE, NOT, LE, LT, GE, GT, PRINT, IF, ELSE, WHILE, FOR,
+         SWITCH, CASE, DEFAULT, BREAK;
+terminal UMINUS;
+terminal String NUM, VAR;
+
+non terminal List list, asgn, expr, stmt, cond, while, if, end, stmtlist, for,
+	          switch, cases, case;
+
+precedence right ASGN;
+precedence left OR;
+precedence left AND;
+precedence left GT, GE, LT, LE, EQ, NE;
+precedence left ADD, SUB;
+precedence left MUL, DIV;
+precedence left UMINUS;
+precedence left POW;
+
+start with list;
+
+list ::= {: RESULT = new ArrayList(); :}
+	| list:l NL {: RESULT = l; :}
+	| list:l asgn:a NL {: if(l != null) { addAll(l, a); } else { l = a; } RESULT = code2(l, "pop", "stop"); :}
+	| list:l stmt:s NL {: if(l != null) { addAll(l, s); } else { l = s; } RESULT = code(l, "stop"); :}
+	| list:l expr:e NL
+	{: if(l != null) { addAll(l, e); } else { l = e; } RESULT = code2(l, "print", "stop"); :}
+	| list error {: RESULT = new ArrayList(); :} NL
+	;
+
+asgn ::=
+	VAR:v ASGN expr:e {: RESULT = code3(e, "varpush", v, "asgn"); :}
+	;
+
+cases ::= {: RESULT = new ArrayList(); :}
+	| cases:cs NL {:
+		RESULT = cs;
+	:}
+	| cases:cs case:c {:
+		if(cs != null) {
+			addAll(cs, c);
+		} else {
+			cs = c;
+		}
+		RESULT = cs;
+	:}
+	;
+
+case ::=
+	  CASE expr:e stmtlist:s BREAK {:
+		e = code2(e, "eq", "stop");
+		s = code2(s, "constpush", "1");
+		s = code(s, "stop");
+		List c = newList3("casecode", "stop", "stop");
+		addAll(c, e);
+		c.set(1, String.valueOf(c.size()));
+		addAll(c, s);
+		c.set(2, String.valueOf(c.size()));
+		RESULT = c;
+	:}
+	| CASE expr:e stmtlist:s {:
+		e = code2(e, "eq", "stop");
+		s = code2(s, "constpush", "0");
+		s = code(s, "stop");
+		List c = newList3("casecode", "stop", "stop");
+		addAll(c, e);
+		c.set(1, String.valueOf(c.size()));
+		addAll(c, s);
+		c.set(2, String.valueOf(c.size()));
+		RESULT = c;
+	:}
+	| DEFAULT stmtlist:s BREAK {:
+		List e = newList("default");
+		s = code2(s, "constpush", "1");
+		s = code(s, "stop");
+		List c = newList3("casecode", "stop", "stop");
+		addAll(c, e);
+		c.set(1, String.valueOf(c.size()));
+		addAll(c, s);
+		c.set(2, String.valueOf(c.size()));
+		RESULT = c;
+	:}
+	| DEFAULT stmtlist:s {:
+		List e = newList("default");
+		s = code2(s, "constpush", "0");
+		s = code(s, "stop");
+		List c = newList3("casecode", "stop", "stop");
+		addAll(c, e);
+		c.set(1, String.valueOf(c.size()));
+		addAll(c, s);
+		c.set(2, String.valueOf(c.size()));
+		RESULT = c;
+	:}
+	;
+
+stmt ::= 
+	expr:e {: RESULT = code(e, "pop"); :}
+	| PRINT expr:e {: RESULT = code(e, "prexpr"); :}
+	| for:f LPAR expr:init PYC expr:cond PYC expr:it RPAR stmt:s end:e {:
+		cond = code(cond, "stop");
+		init = code(init, "stop");
+		s    = code(s, "stop");
+		addAll(f, cond);
+		if(init != null) {
+			f.set(1, String.valueOf(f.size()));
+			addAll(f, init);
+		}
+		if(s != null) {
+			f.set(2, String.valueOf(f.size()));
+			addAll(f, s);
+		}
+		if(it != null) {
+			f.set(3, String.valueOf(f.size()));
+			addAll(f, it);
+		}
+		addAll(f, e);
+		f.set(4, String.valueOf(f.size()));
+		RESULT = f;
+	:}
+	| while:w cond:c stmt:s end:e {:
+		w.set(2, e.get(0));
+		addAll(w, c);
+		if(s != null) {
+			w.set(1, String.valueOf(w.size()));
+			addAll(w, s);
+		}
+		addAll(w, e);
+		w.set(2, String.valueOf(w.size()));
+		RESULT = w;
+	:}
+	| switch:s LPAR expr:e RPAR LBRA cases:c RBRA end:en {:
+		e = code(e, "stop");
+		addAll(s, e);
+		s.set(1, String.valueOf(s.size()));
+		addAll(s, c);
+		addAll(s, en);
+		s.set(2, String.valueOf(s.size()));
+		RESULT = s;
+	:}
+	| if:i cond:c stmt:s end:e {:
+		addAll(i, c);
+		if(s != null) {
+			i.set(1, String.valueOf(i.size()));
+			addAll(i, s);
+		}
+		addAll(i, e);
+		i.set(3, String.valueOf(i.size()));
+		RESULT = i;
+	:}
+	| if:i cond:c stmt:s1 end:e1 ELSE stmt:s2 end:e2 {:
+		addAll(i, c);
+		if(s1 != null) {
+			i.set(1, String.valueOf(i.size()));
+			addAll(i, s1);
+		}
+		addAll(i, e1);
+		if(s2 != null) {
+			i.set(2, String.valueOf(i.size()));
+			addAll(i, s2);
+		}
+		addAll(i, e2);
+		i.set(3, String.valueOf(i.size()));
+		RESULT = i;
+	:}
+	| LBRA stmtlist:s RBRA {: RESULT = s; :}
+	;
+
+cond ::=
+	LPAR expr:e RPAR {: RESULT = code(e, "stop"); :}
+	;
+
+for ::=
+	FOR {: RESULT = newList5("forcode", "stop", "stop", "stop", "stop"); :}
+	;
+
+switch ::= SWITCH {: RESULT = newList3("switchcode", "stop", "stop"); :}
+	;
+
+while ::=
+	WHILE {: RESULT = newList3("whilecode", "stop", "stop"); :}
+	;
+
+if ::=
+	IF {: RESULT = newList4("ifcode", "stop", "stop", "stop"); :}
+	;	
+
+end ::=    {: RESULT = code(null, "stop"); :}
+	;
+
+
+stmtlist ::= {: RESULT = new ArrayList(); :}
+	| stmtlist:s NL {: RESULT = s; :}
+	| stmtlist:sl stmt:s {:
+		if(sl != null) {
+			addAll(sl, s);
+		} else {
+			sl = s;
+		}
+		RESULT = sl;
+	:}
+	;
+
+expr ::=
+	  NUM:n {: RESULT = newList2("constpush", n); :}
+	| VAR:v {: RESULT = newList2("varpush", v); :}
+	| asgn:a {: RESULT = a; :}
+	| LPAR expr:e RPAR {: RESULT = e; :}
+	| expr:e1 ADD expr:e2 {: addAll(e1, e2); RESULT = code(e1, "add"); :}
+	| expr:e1 SUB expr:e2 {: addAll(e1, e2); RESULT = code(e1, "sub"); :}
+	| expr:e1 MUL expr:e2 {: addAll(e1, e2); RESULT = code(e1, "mul"); :}
+	| expr:e1 DIV expr:e2 {: addAll(e1, e2); RESULT = code(e1, "div"); :}
+	| expr:e1 POW expr:e2 {: addAll(e1,e2); RESULT = code(e1, "pow"); :}
+	| SUB expr:e {: RESULT = code(e, "negate"); :} %prec UMINUS
+	| expr:e1 GT expr:e2 {: addAll(e1, e2); RESULT = code(e1, "gt"); :}
+	| expr:e1 GE expr:e2 {: addAll(e1, e2); RESULT = code(e1, "ge"); :}
+	| expr:e1 LT expr:e2 {: addAll(e1, e2); RESULT = code(e1, "lt"); :}
+	| expr:e1 LE expr:e2 {: addAll(e1, e2); RESULT = code(e1, "le"); :}
+	| expr:e1 EQ expr:e2 {: addAll(e1, e2); RESULT = code(e1, "eq"); :}
+	| expr:e1 NE expr:e2 {: addAll(e1, e2); RESULT = code(e1, "ne"); :}
+	| expr:e1 AND expr:e2 {: addAll(e1, e2); RESULT = code(e1, "and"); :}
+	| expr:e1 OR expr:e2 {: addAll(e1, e2); RESULT = code(e1, "or"); :}
+	| NOT expr:e {: RESULT = code(e, "not"); :}
+	;
+

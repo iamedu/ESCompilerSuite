@@ -1,0 +1,93 @@
+import java_cup.runtime.*;
+import java.util.List;
+import java.util.ArrayList;
+
+action code {:
+:}
+
+parser code {:
+	public static void main(String args[]) throws Exception {
+		Symbol s = (new parser(new Yylex(System.in))).parse();
+		List<List<String>> reglas = (List<List<String>>)s.value;
+		for(List<String> regla : reglas) {
+			System.out.print(regla.get(0) + "->");
+			for(int i = 1; i < regla.size(); i++) {
+				System.out.print(regla.get(i));
+			}
+			System.out.println();
+		}
+	}
+:}
+
+terminal OR, FLECHA, PUNTO_COMA;
+terminal String	SIMB;
+non terminal List reglas, lado_der;
+non terminal String lado_izq;
+non terminal List regla, simbolos, lados_der;
+
+precedence right SIMB;
+
+start with reglas;
+
+reglas ::= regla:r
+{:
+List<List<String>> tmp = new ArrayList<List<String>>();
+tmp.addAll(r);
+RESULT = tmp;
+:}
+|
+reglas:rs regla:r
+{:
+rs.addAll(r);
+RESULT = rs;
+:}
+;
+
+regla ::= lado_izq:li FLECHA lados_der:ld PUNTO_COMA
+{:
+List<List<String>> tmp = (List<List<String>>)ld;
+for(List<String> l : tmp) {
+	l.add(0, li);
+}
+RESULT = ld;
+:}
+;
+
+lado_izq ::= SIMB:s
+{: RESULT = s; :}
+;
+
+lados_der ::= lado_der:ld
+{:
+List<List<String>> tmp = new ArrayList<List<String>>();
+tmp.add(ld);
+RESULT = tmp;
+:}
+|
+lados_der:lds OR lado_der:ld
+{:
+lds.add(ld);
+RESULT = lds;
+:}
+;
+
+lado_der ::= simbolos:s
+{: RESULT = s; :}
+;
+
+simbolos ::= SIMB:s
+{:
+List<String> simbolos = new ArrayList<String>();
+simbolos.add(s);
+RESULT = simbolos;
+:}
+|
+simbolos:ss SIMB:s
+{:
+ss.add(s);
+RESULT = ss;
+:}
+;
+
+
+

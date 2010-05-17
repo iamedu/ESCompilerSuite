@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0" language="jambi">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>798</width>
+    <height>570</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="maximumSize">
+         <size>
+          <width>250</width>
+          <height>16777195</height>
+         </size>
+        </property>
+        <property name="title">
+         <string>Análisis LL(1)</string>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Escriba las Reglas</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="plainTextEdit"/>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButton">
+             <property name="text">
+              <string>Pintar la Tabla</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Analizar cadena</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="plainTextEdit_2"/>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButton_2">
+             <property name="text">
+              <string>Analizar cadena</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>Tabla LL(1)</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QTableWidget" name="tableWidget">
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>60</number>
+           </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>50</number>
+           </attribute>
+           <attribute name="verticalHeaderDefaultSectionSize">
+            <number>60</number>
+           </attribute>
+           <attribute name="verticalHeaderMinimumSectionSize">
+            <number>50</number>
+           </attribute>
+           <row>
+            <property name="text">
+             <string>000000</string>
+            </property>
+           </row>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>798</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArchivo">
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="actionNueva_Gramatica"/>
+    <addaction name="actionGuardar_Gramatica"/>
+    <addaction name="actionCargar_Gramatica"/>
+    <addaction name="separator"/>
+    <addaction name="actionSalir"/>
+   </widget>
+   <widget class="QMenu" name="menuAcerca_de">
+    <property name="title">
+     <string>Ayuda</string>
+    </property>
+    <addaction name="actionTabla_LL1"/>
+   </widget>
+   <addaction name="menuArchivo"/>
+   <addaction name="menuAcerca_de"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNueva_Gramatica">
+   <property name="text">
+    <string>Nueva Gramatica</string>
+   </property>
+  </action>
+  <action name="actionGuardar_Gramatica">
+   <property name="text">
+    <string>Guardar Gramatica</string>
+   </property>
+  </action>
+  <action name="actionTabla_LL1">
+   <property name="text">
+    <string>Acerca de...</string>
+   </property>
+  </action>
+  <action name="actionCargar_Gramatica">
+   <property name="text">
+    <string>Cargar Gramatica</string>
+   </property>
+  </action>
+  <action name="actionSalir">
+   <property name="text">
+    <string>Salir</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

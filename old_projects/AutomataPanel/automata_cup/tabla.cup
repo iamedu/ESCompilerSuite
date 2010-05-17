@@ -1,0 +1,47 @@
+import java_cup.runtime.*;
+import elex.*;
+
+action code {:
+:}
+
+parser code {:
+	public static void main(String args[]) throws Exception {
+		Symbol s = (new parser(new Yylex(System.in))).parse();
+		Automata a = (Automata)s.value;
+		System.out.println(a.analizar("ab"));
+	}
+:}
+
+terminal CERR_ESTR, CERR_POSI, INTERR, OR, FLECHA, PUNTO_COMA, PAR_IZQ, PAR_DER;
+terminal CONCAT;
+terminal String SIMB;
+non terminal Automata G;
+
+precedence left OR;
+precedence left CONCAT;
+precedence left INTERR, CERR_ESTR, CERR_POSI;
+
+start with G;
+
+G ::= G:g1 G:g2
+{: RESULT = g1.concat(g2); :}
+%prec CONCAT
+|
+G:g1 OR G:g2
+{: RESULT = g1.unir(g2); :}
+|
+G:g1 CERR_ESTR
+{: RESULT = g1.cerraduraEstrella(); :}
+|
+G:g1 CERR_POSI
+{: RESULT = g1.cerraduraPositiva(); :}
+|
+G:g1 INTERR
+{: RESULT = g1.interrogacion(); :}
+|
+PAR_IZQ G:g PAR_DER
+{: RESULT = g; :}
+|
+SIMB:s
+{: RESULT = new Automata(s); :}
+;
